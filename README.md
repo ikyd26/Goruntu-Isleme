@@ -1,6 +1,3 @@
-GitHub deposu için kopyalayıp doğrudan `README.md` veya `Ders_01_Matlab_Temelleri.md` dosyası olarak kullanabileceğiniz, Markdown formatında yapılandırılmış ders içeriği:
-
----
 
 # Bölüm 1: MATLAB Temelleri ve Çalışma Ortamı
 
