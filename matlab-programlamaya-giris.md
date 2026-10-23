@@ -1,603 +1,465 @@
-# MATLAB Kullanımına Giriş
-
-MATLAB, sayısal hesaplama, veri analizi ve görselleştirme için kullanılan bir programlama ortamıdır. Matrislerle çalışmayı kolaylaştıran yapısı, görüntü işleme uygulamaları için uygun bir temel sağlar.
-
-Bu bölümde MATLAB ortamı, değişkenler, matrisler, koşullar ve döngüler kısa örneklerle ele alınmaktadır. **Örnekler için ek bir araç kutusu veya görüntü dosyası gerekmez.**
-
-## 1. MATLAB Çalışma Ortamı
-
-| Bölüm | Kullanım amacı |
-|---|---|
-| **Command Window** | Komutları doğrudan çalıştırma |
-| **Editor** | Kod dosyaları oluşturma ve düzenleme |
-| **Workspace** | Bellekteki değişkenleri inceleme |
-| **Current Folder** | Çalışma klasöründeki dosyalara erişme |
-
-İlk komut, Command Window’a yazılarak çalıştırılabilir:
-
-```matlab
-5 + 3
 ```
 
-**Çıktı:**
+%% MATLAB'A GIRIS VE TEMEL ISLEMLER
+% Bu dosyada MATLAB programlamanin temel konulari ele alinmaktadir.
+% Konular:
+% 1. Calisma ortaminin temizlenmesi
+% 2. Degisken tanimlama
+% 3. Aritmetik islemler
+% 4. Vektor olusturma
+% 5. Matris olusturma
+% 6. Matris elemanlarina erisim
+% 7. Matris elemanlarini degistirme
+% 8. Matris boyutlari
+% 9. Hazir matris fonksiyonlari
+% 10. Karsilastirma ve mantiksal operatorler
+% 11. Kosullu ifadeler
+% 12. For dongusu
 
-```text
-ans =
+%% 1. MATLAB CALISMA ORTAMININ TEMIZLENMESI
 
-     8
-```
+clc;                  % Command Window ekranini temizler.
+clear;                % Workspace icerisindeki degiskenleri temizler.
+close all;            % Acik olan grafik pencerelerini kapatir.
 
-Sonuç bir değişkene atanmadığında MATLAB, `ans` değişkenini kullanır.
+% MATLAB'da % isareti yorum satiri olusturur.
+% Yorum satirlari program tarafindan calistirilmaz.
+% %% isareti kodu ayri bolumlere ayirir.
+% Noktali virgul (;) komut sonucunun ekrana yazilmasini engeller.
 
-## 2. Script Dosyası Oluşturma
+%% 2. DEGISKEN TANIMLAMA
 
-Script, MATLAB komutlarının sırayla yazıldığı `.m` uzantılı dosyadır.
+a = 10;               % a degiskenine 10 degeri atanir.
+b = 20;               % b degiskenine 20 degeri atanir.
 
-1. **New Script** seçeneğiyle yeni dosya oluşturulur.
-2. Komutlar Editor alanına yazılır.
-3. Dosya `ilk_uygulama.m` adıyla kaydedilir.
-4. **Run** düğmesiyle çalıştırılır.
+a                     % a degiskeninin degerini ekrana yazdirir.
+b                     % b degiskeninin degerini ekrana yazdirir.
 
-```matlab
-a = 10;
-b = 20;
+disp(a)               % a degiskeninin degerini ekrana yazdirir.
+disp(b)               % b degiskeninin degerini ekrana yazdirir.
 
-toplam = a + b;
+who                   % Workspace icerisindeki degisken isimlerini listeler.
+whos                  % Degiskenlerin boyut, tur ve bellek bilgilerini gosterir.
 
-disp(toplam)
-```
+%% 3. TEMEL ARITMETIK ISLEMLER
 
-**Çıktı:** `30`
+a = 10;               % Birinci sayi tanimlanir.
+b = 20;               % Ikinci sayi tanimlanir.
 
-Dosya adlarında boşluk yerine alt çizgi kullanılabilir. `sum.m` veya `size.m` gibi yerleşik fonksiyon adlarının dosya adı olarak kullanılması önlenmelidir.
+toplam = a + b;       % Iki sayiyi toplar. Sonuc: 30
+fark = a - b;         % Iki sayiyi cikarir. Sonuc: -10
+carpim = a * b;       % Iki sayiyi carpar. Sonuc: 200
+bolum = a / b;        % Birinci sayiyi ikinci sayiya boler. Sonuc: 0.5
 
-## 3. Değişken Tanımlama
+kuvvet = a^2;         % a sayisinin karesini hesaplar. Sonuc: 100
+ortalama = (a+b)/2;   % Iki sayinin aritmetik ortalamasini hesaplar. Sonuc: 15
 
-Değişkenler, verileri saklamak için kullanılır.
+kok = sqrt(25);       % 25 sayisinin karekokunu hesaplar. Sonuc: 5
 
-```matlab
-genislik = 640;
-yukseklik = 480;
+disp(toplam)          % Toplama isleminin sonucunu gosterir.
+disp(fark)            % Cikarma isleminin sonucunu gosterir.
+disp(carpim)          % Carpma isleminin sonucunu gosterir.
+disp(bolum)           % Bolme isleminin sonucunu gosterir.
+disp(kuvvet)          % Kuvvet alma isleminin sonucunu gosterir.
+disp(ortalama)        % Aritmetik ortalamayi gosterir.
+disp(kok)             % Karekok sonucunu gosterir.
 
-pikselSayisi = genislik * yukseklik;
-```
+%% 4. VEKTOR OLUSTURMA
 
-Bir değişkenin değeri sonradan değiştirilebilir:
+A = 1:10;             % 1'den 10'a kadar birer artan vektor olusturur.
 
-```matlab
-genislik = 800;
-```
+B = 0:2:10;           % 0'dan 10'a kadar ikiser artan vektor olusturur.
 
-**Değişken adlandırma kuralları:**
+C = 0:5:100;          % 0'dan 100'e kadar beser artan vektor olusturur.
 
-- Harfle başlamalıdır.
-- Harf, rakam ve alt çizgi içerebilir.
-- Boşluk içeremez.
-- Büyük ve küçük harfe duyarlıdır.
+D = 10:-2:0;          % 10'dan 0'a kadar ikiser azalan vektor olusturur.
 
-```matlab
-piksel = 100;
-Piksel = 200;
-```
+E = [10 20 30 40];    % Satir vektoru olusturur.
 
-Bu örnekte `piksel` ve `Piksel` iki farklı değişkendir.
+F = [10;20;30;40];    % Sutun vektoru olusturur.
 
-## 4. Noktalı Virgül ve Açıklama Satırları
+% Vektor olusturmada iki nokta operatorunun kullanimi:
+% baslangic:bitis
+% baslangic:adim:bitis
 
-Satır sonunda `;` kullanılması, sonucun otomatik yazdırılmasını engeller.
+% Ornek:
+% 1:10      -> 1,2,3,4,5,6,7,8,9,10
+% 0:2:10    -> 0,2,4,6,8,10
+% 1:5:100   -> 1,6,11,16,...,96
 
-```matlab
-a = 10;   % Değer atanır, ekrana yazdırılmaz.
-b = 20    % Değer atanır ve ekrana yazdırılır.
-```
+%% 5. MATRIS OLUSTURMA
 
-`%` işaretinden sonraki bölüm açıklamadır:
-
-```matlab
-% Toplam piksel sayısını hesapla.
-pikselSayisi = 640 * 480;
-```
-
-Kodları bölümlere ayırmak için `%%` kullanılabilir:
-
-```matlab
-%% Değişkenler
-a = 10;
-b = 20;
-
-%% Hesaplama
-toplam = a + b;
-```
-
-## 5. Ekrana Bilgi Yazdırma
-
-### `disp` kullanımı
-
-```matlab
-sonuc = 150;
-
-disp('Hesaplanan değer:')
-disp(sonuc)
-```
-
-### `fprintf` kullanımı
-
-```matlab
-genislik = 640;
-ortalama = 124.256;
-
-fprintf('Genişlik: %d piksel\n', genislik);
-fprintf('Ortalama: %.2f\n', ortalama);
-```
-
-**Çıktı:**
-
-```text
-Genişlik: 640 piksel
-Ortalama: 124.26
-```
-
-| Gösterim | Anlamı |
-|---|---|
-| `%d` | Tam sayı |
-| `%.2f` | Ondalık noktadan sonra iki basamak |
-| `\n` | Yeni satır |
-
-**Not:** MATLAB kodunda ondalık ayırıcı olarak nokta kullanılır: `3.14`.
-
-## 6. Temel Matematiksel İşlemler
-
-```matlab
-a = 12;
-b = 4;
-
-toplam = a + b;    % 16
-fark = a - b;      % 8
-carpim = a * b;    % 48
-bolum = a / b;     % 3
-kuvvet = b ^ 2;    % 16
-```
-
-Parantezler işlem sırasını belirlemek için kullanılır:
-
-```matlab
-ortalama = (a + b) / 2;
-```
-
-Sık kullanılan matematiksel fonksiyonlar:
-
-```matlab
-abs(-8)       % Mutlak değer: 8
-sqrt(25)      % Karekök: 5
-round(3.7)    % En yakın tam sayı: 4
-floor(3.7)    % Aşağı yuvarlama: 3
-ceil(3.2)     % Yukarı yuvarlama: 4
-```
-
-## 7. Vektör Oluşturma
-
-Vektör, tek satır veya tek sütundan oluşan veri dizisidir.
-
-```matlab
-satirVektoru = [10 20 30 40];
-
-sutunVektoru = [10;
-               20;
-               30;
-               40];
-```
-
-Belirli aralıklarla değer oluşturma:
-
-```matlab
-A = 1:5;       % [1 2 3 4 5]
-B = 0:2:10;    % [0 2 4 6 8 10]
-C = 5:-1:1;    % [5 4 3 2 1]
-```
-
-Genel yapı:
-
-```matlab
-baslangic:adim:bitis
-```
-
-## 8. Matris Oluşturma
-
-Matris, satır ve sütunlardan oluşan sayı tablosudur.
-
-```matlab
 A = [10 20 30;
      40 50 60;
-     70 80 90];
-```
+     70 80 90;
+     100 110 120;
+     120 130 140];
 
-- Boşluklar veya virgüller sütunları ayırır.
-- Köşeli parantez içindeki noktalı virgüller yeni satır oluşturur.
-- Bu örnekte matrisin boyutu **3 × 3**’tür.
+% A matrisi 5 satir ve 3 sutundan olusmaktadir.
+% Koseli parantezler [] matris olusturmak icin kullanilir.
+% Bosluk veya virgul ayni satirdaki elemanlari ayirir.
+% Noktali virgul (;) matrisin satirlarini ayirir.
 
-**Görüntü işlemeyle ilişkisi:** Gri seviyeli bir görüntünün piksel değerleri, iki boyutlu bir matriste tutulabilir.
+A                     % A matrisinin tamamini ekrana yazdirir.
 
-## 9. Matris Elemanlarına Erişme
+%% 6. MATRIS ELEMANLARINA ERISIM
 
-MATLAB’da indisler **1’den başlar**. Elemanlara **satır, sütun** sırasıyla erişilir.
+deger = A(2,3);       % 2. satir ve 3. sutundaki elemana erisir. Sonuc: 60
 
-```matlab
+A(1,1)                % 1. satir ve 1. sutundaki elemani getirir. Sonuc: 10
+
+A(3,2)                % 3. satir ve 2. sutundaki elemani getirir. Sonuc: 80
+
+A(5,3)                % 5. satir ve 3. sutundaki elemani getirir. Sonuc: 140
+
+% MATLAB'da indisler 1'den baslar.
+% A(satir,sutun) ifadesi ile matris elemanlarina erisilir.
+
+%% 7. MATRISTE SATIR VE SUTUN SECME
+
+A(2,:)                % Matrisin 2. satirindaki butun elemanlari getirir.
+
+A(:,1)                % Matrisin 1. sutunundaki butun elemanlari getirir.
+
+A(1,:)                % Matrisin ilk satirini getirir.
+
+A(:,3)                % Matrisin 3. sutununu getirir.
+
+A(end,:)              % Matrisin son satirini getirir.
+
+A(:,end)              % Matrisin son sutununu getirir.
+
+A(end,1:end)          % Son satirdaki 1. sutundan son sutuna kadar getirir.
+
+A(1:3,:)              % Ilk 3 satiri getirir.
+
+A(:,1:2)              % Ilk 2 sutunu getirir.
+
+A(2:4,1:2)            % 2-4. satirlar ile 1-2. sutunlari secer.
+
+% : operatoru ilgili boyuttaki butun indisleri temsil eder.
+% end ifadesi ilgili boyuttaki son indisi temsil eder.
+
+%% 8. MATRIS ELEMANLARINI DEGISTIRME
+
 A = [10 20 30;
      40 50 60;
-     70 80 90];
+     70 80 90;
+     100 110 120;
+     120 130 140];
 
-deger = A(2, 3);
+A(2,3) = 500;         % 2. satir 3. sutundaki elemani 500 yapar.
 
-disp(deger)   % 60
-```
+A(1,1) = 100;         % 1. satir 1. sutundaki elemani 100 yapar.
 
-Bir elemanı değiştirme:
+A(1:2:5,1) = 50;      % 1, 3 ve 5. satirlarin 1. sutununu 50 yapar.
 
-```matlab
-A(2, 3) = 100;
-```
+A(:,2) = 25;          % 2. sutundaki butun elemanlari 25 yapar.
 
-Bir satır veya sütunu seçme:
+A(2,:) = 10;          % 2. satirdaki butun elemanlari 10 yapar.
 
-```matlab
-ikinciSatir = A(2, :);   % İkinci satır
-ilkSutun = A(:, 1);      % Birinci sütun
-sonSatir = A(end, :);    % Son satır
-```
+disp(A)               % Guncellenmis matrisi ekrana yazdirir.
 
-Belirli bir bölgeyi seçme:
+%% 9. MATRIS BOYUTLARINI BULMA
 
-```matlab
-bolge = A(1:2, 2:3);
-```
-
-## 10. Boyut ve Eleman Sayısı
-
-```matlab
 A = [10 20 30;
-     40 50 60];
+     40 50 60;
+     70 80 90;
+     100 110 120;
+     120 130 140];
 
-[satirSayisi, sutunSayisi] = size(A);
+[satir,sutun] = size(A);  % Matrisin satir ve sutun sayisini hesaplar.
 
-fprintf('Satır sayısı: %d\n', satirSayisi);
-fprintf('Sütun sayısı: %d\n', sutunSayisi);
-fprintf('Eleman sayısı: %d\n', numel(A));
-```
+satir = size(A,1);       % Matrisin satir sayisini verir. Sonuc: 5
 
-**Çıktı:**
+sutun = size(A,2);       % Matrisin sutun sayisini verir. Sonuc: 3
 
-```text
-Satır sayısı: 2
-Sütun sayısı: 3
-Eleman sayısı: 6
-```
+boyut = satir*sutun;     % Toplam eleman sayisini hesaplar. Sonuc: 15
 
-| Fonksiyon | Görevi |
-|---|---|
-| `size(A)` | Boyutları verir. |
-| `size(A,1)` | Satır sayısını verir. |
-| `size(A,2)` | Sütun sayısını verir. |
-| `numel(A)` | Toplam eleman sayısını verir. |
-| `length(A)` | En büyük boyutun uzunluğunu verir. |
+boyut = size(A,1)*size(A,2); % Satir ve sutun sayilarini carpar.
 
-## 11. Hazır Matrisler Oluşturma
+boyut = numel(A);        % Matrisin toplam eleman sayisini verir. Sonuc: 15
 
-```matlab
-A = zeros(3, 4);   % Sıfırlardan oluşan matris
-B = ones(3, 4);    % Birlerden oluşan matris
-C = rand(3, 4);    % 0–1 aralığında rastgele değerler
-D = false(3, 4);   % Mantıksal false değerleri
-```
+uzunluk = length(A);     % En buyuk boyutun uzunlugunu verir. Sonuc: 5
 
-Örneğin bütün elemanları 100 olan bir matris:
+% size(A)    -> Matrisin boyutlarini verir.
+% size(A,1)  -> Satir sayisini verir.
+% size(A,2)  -> Sutun sayisini verir.
+% numel(A)   -> Toplam eleman sayisini verir.
+% length(A)  -> En buyuk boyutun uzunlugunu verir.
 
-```matlab
-I = 100 * ones(3, 4);
-```
+%% 10. HAZIR MATRIS OLUSTURMA FONKSIYONLARI
 
-Bu yapılar, görüntü işleme uygulamalarında başlangıç görüntüsü veya sonuç matrisi oluşturmak için kullanılabilir.
+A = zeros(10,10);        % 10x10 boyutunda sifir matrisi olusturur.
 
-## 12. Eleman Bazlı İşlemler
+B = ones(10,10);         % 10x10 boyutunda birlerden olusan matris olusturur.
 
-Matrislerin karşılıklı elemanlarına ayrı ayrı işlem uygulamak için noktalı işleçler kullanılır.
+C = zeros(10,10)+20;     % Butun elemanlari 20 olan matris olusturur.
 
-```matlab
+D = ones(10,10)+40;      % Butun elemanlari 41 olan matris olusturur.
+
+E = 20*ones(10,10);      % Butun elemanlari 20 olan matris olusturur.
+
+F = eye(5);              % 5x5 boyutunda birim matris olusturur.
+
+G = rand(3,3);           % 0 ile 1 arasinda rastgele sayilar olusturur.
+
+% zeros(m,n) -> m satir n sutunluk sifir matrisi
+% ones(m,n)  -> m satir n sutunluk birler matrisi
+% eye(n)     -> n x n boyutunda birim matris
+% rand(m,n)  -> m x n boyutunda rastgele sayilar matrisi
+
+%% 11. MATRISLERLE ARITMETIK ISLEMLER
+
 A = [1 2;
      3 4];
 
-B = [2 2;
-     2 2];
+B = [5 6;
+     7 8];
 
-C = A .* B;
-D = A ./ B;
-E = A .^ 2;
-```
+C = A+B;                 % Iki matrisi eleman bazinda toplar.
 
-`C` matrisinin sonucu:
+D = A-B;                 % Iki matrisi eleman bazinda cikarir.
 
-```text
-2   4
-6   8
-```
+E = A*B;                 % Matris carpimi yapar.
 
-| İşleç | Görevi |
-|---|---|
-| `*` | Matris çarpımı |
-| `.*` | Eleman bazlı çarpma |
-| `./` | Eleman bazlı bölme |
-| `.^` | Eleman bazlı üs alma |
+F = A.*B;                % Karsilikli elemanlari carpar.
 
-**Örnek:** `A .^ 2`, her elemanın karesini ayrı ayrı hesaplar.
+G = A.^2;                % Matrisin her elemaninin karesini alir.
 
-## 13. Koşullu İşlemler
+H = A./B;                % Karsilikli elemanlari birbirine boler.
 
-`if–else`, bir koşula göre farklı işlemler gerçekleştirir.
+% *  -> Matris carpimi
+% .* -> Eleman bazinda carpma
+% ^  -> Matris kuvveti
+% .^ -> Eleman bazinda kuvvet alma
+% ./ -> Eleman bazinda bolme
 
-```matlab
-deger = 150;
+%% 12. KARSILASTIRMA OPERATORLERI
 
-if deger >= 128
-    disp('Değer 128 veya üzerindedir.');
-else
-    disp('Değer 128 altındadır.');
-end
-```
+a = 10;                  % Birinci degisken
+b = 20;                  % Ikinci degisken
 
-Birden fazla durum için `elseif` kullanılır:
+a > b                   % a, b'den buyuk mu? Sonuc: false
 
-```matlab
-deger = 150;
+a < b                   % a, b'den kucuk mu? Sonuc: true
 
-if deger < 85
-    disp('Düşük değer');
-elseif deger < 170
-    disp('Orta değer');
-else
-    disp('Yüksek değer');
-end
-```
+a >= b                  % a, b'den buyuk veya esit mi?
 
-### Karşılaştırma işleçleri
+a <= b                  % a, b'den kucuk veya esit mi?
 
-| İşleç | Anlamı |
-|---|---|
-| `==` | Eşit |
-| `~=` | Eşit değil |
-| `>` | Büyük |
-| `<` | Küçük |
-| `>=` | Büyük veya eşit |
-| `<=` | Küçük veya eşit |
+a == b                  % a ile b esit mi?
 
-**Dikkat:** `=` değer atar, `==` eşitliği kontrol eder.
+a ~= b                  % a ile b farkli mi?
 
-## 14. Mantıksal İşlemler
+% Karsilastirma islemleri true veya false degeri uretir.
+% true  -> Mantiksal dogru (1)
+% false -> Mantiksal yanlis (0)
 
-Birden fazla koşul birleştirilebilir:
+%% 13. MANTIKSAL OPERATORLER
 
-```matlab
-deger = 150;
+a = 10;
+b = 20;
 
-if deger >= 100 && deger <= 200
-    disp('Değer 100–200 aralığındadır.');
-end
-```
+sonuc1 = a < 20 && b > 10;  % Her iki kosul da dogruysa true olur.
 
-- `&&`: İki koşul da doğru olmalıdır.
-- `||`: Koşullardan en az biri doğru olmalıdır.
-- `~`: Mantıksal sonucu tersine çevirir.
+sonuc2 = a > 20 || b > 10;  % Kosullardan en az biri dogruysa true olur.
 
-Dizilerde eleman bazlı karşılaştırma için `&` ve `|` kullanılır:
+sonuc3 = ~(a > b);          % Mantiksal DEGIL islemi uygular.
 
-```matlab
-A = [50 120 180 240];
+% && -> Kisa devreli mantiksal VE
+% || -> Kisa devreli mantiksal VEYA
+% ~  -> Mantiksal DEGIL
+% &  -> Eleman bazinda mantiksal VE
+% |  -> Eleman bazinda mantiksal VEYA
 
-maske = (A >= 100) & (A <= 200);
+%% 14. IF - ELSE KOSULLU IFADELER
 
-disp(maske)
-```
-
-**Çıktı:**
-
-```text
-0   1   1   0
-```
-
-## 15. `for` Döngüsü
-
-`for`, bir değer dizisi üzerinde işlemleri tekrarlar.
-
-```matlab
-for i = 1:5
-    fprintf('Adım: %d\n', i);
-end
-```
-
-İkişer artırarak ilerleme:
-
-```matlab
-for i = 2:2:10
-    disp(i)
-end
-```
-
-Döngüyle toplam hesaplama:
-
-```matlab
-toplam = 0;
-
-for i = 1:5
-    toplam = toplam + i;
-end
-
-disp(toplam)   % 15
-```
-
-## 16. `while` Döngüsü
-
-`while`, bir koşul doğru olduğu sürece işlemi tekrarlar.
-
-```matlab
-sayac = 1;
-
-while sayac <= 5
-    disp(sayac)
-    sayac = sayac + 1;
-end
-```
-
-Bu örnekte:
-
-1. Koşul kontrol edilir.
-2. Sayaç ekrana yazdırılır.
-3. Sayaç bir artırılır.
-4. Koşul yeniden kontrol edilir.
-
-**Dikkat:** Sayaç güncellenmezse döngü sonsuza kadar devam edebilir. Çalışan işlemi durdurmak için **Ctrl+C** kullanılabilir.
-
-## 17. İç İçe Döngüler
-
-Bir matrisin bütün elemanlarını dolaşmak için iç içe döngüler kullanılabilir.
-
-```matlab
 A = [10 20 30;
-     40 50 60];
+     40 50 60;
+     70 80 90;
+     100 110 120;
+     120 130 140];
 
-for satir = 1:size(A, 1)
-    for sutun = 1:size(A, 2)
+if A(4,1)>100 && A(2,2)>100  % Iki kosulun dogru olup olmadigini kontrol eder.
 
-        fprintf('A(%d,%d) = %d\n', ...
-            satir, sutun, A(satir, sutun));
+    disp('Deger Buyuktur')   % Iki kosul da dogruysa calisir.
+
+else                        % Kosul saglanmiyorsa bu bolume gecilir.
+
+    disp('Deger Kucuktur')  % Kosul yanlissa calisir.
+
+end                         % Kosullu ifade sonlandirilir.
+
+% A(4,1) = 100 oldugundan ilk kosul yanlistir.
+% A(2,2) = 50 oldugundan ikinci kosul da yanlistir.
+% Ekrana "Deger Kucuktur" yazdirilir.
+
+%% 15. IF - ELSEIF - ELSE YAPISI
+
+not = 75;                   % Ogrencinin notu tanimlanir.
+
+if not >= 90                % Not 90 veya daha buyukse
+
+    disp('AA')
+
+elseif not >= 80            % Not 80-89 araligindaysa
+
+    disp('BA')
+
+elseif not >= 70            % Not 70-79 araligindaysa
+
+    disp('BB')
+
+elseif not >= 60            % Not 60-69 araligindaysa
+
+    disp('CB')
+
+else                        % Yukaridaki kosullarin hicbiri saglanmazsa
+
+    disp('FF')
+
+end                         % Kosullu ifade sonlandirilir.
+
+%% 16. FOR DONGUSU
+
+for i = 1:5:100             % 1'den baslar, beser artar, 100'u asmaz.
+
+    disp(i)                 % Dongu degiskenini ekrana yazdirir.
+
+end                         % Donguyu sonlandirir.
+
+% Dongu degiskeninin aldigi degerler:
+% 1, 6, 11, 16, 21, ..., 96
+% Dongu toplam 20 kez calisir.
+
+%% 17. FOR DONGUSU ILE 1'DEN 10'A KADAR SAYILAR
+
+for i = 1:10               % i degiskeni 1'den 10'a kadar deger alir.
+
+    disp(i)                 % i degerini ekrana yazdirir.
+
+end                         % Donguyu sonlandirir.
+
+%% 18. FOR DONGUSU ILE CIFT SAYILAR
+
+for i = 2:2:100            % 2'den 100'e kadar ikiser artar.
+
+    disp(i)                 % Cift sayilari ekrana yazdirir.
+
+end                         % Donguyu sonlandirir.
+
+%% 19. FOR DONGUSU ILE TEK SAYILAR
+
+for i = 1:2:99             % 1'den 99'a kadar ikiser artar.
+
+    disp(i)                 % Tek sayilari ekrana yazdirir.
+
+end                         % Donguyu sonlandirir.
+
+%% 20. FOR DONGUSU ILE TOPLAM HESAPLAMA
+
+toplam = 0;                 % Toplam degiskeni sifirdan baslatilir.
+
+for i = 1:10               % 1'den 10'a kadar dongu olusturulur.
+
+    toplam = toplam+i;      % Her adimda i degeri toplama eklenir.
+
+end                         % Dongu sonlandirilir.
+
+disp(toplam)                % Toplami ekrana yazdirir. Sonuc: 55
+
+%% 21. FOR DONGUSU ILE MATRIS ELEMANLARINA ERISIM
+
+A = [10 20 30;
+     40 50 60;
+     70 80 90];
+
+for i = 1:size(A,1)         % Matrisin satirlari boyunca ilerler.
+
+    for j = 1:size(A,2)     % Matrisin sutunlari boyunca ilerler.
+
+        disp(A(i,j))        % Secilen matris elemanini ekrana yazdirir.
+
+    end                     % Ic donguyu sonlandirir.
+
+end                         % Dis donguyu sonlandirir.
+
+%% 22. FOR DONGUSU ILE MATRIS ELEMANLARINI TOPLAMA
+
+A = [10 20 30;
+     40 50 60;
+     70 80 90];
+
+toplam = 0;                 % Toplam degiskeni sifirlanir.
+
+for i = 1:size(A,1)         % Satirlar boyunca ilerler.
+
+    for j = 1:size(A,2)     % Sutunlar boyunca ilerler.
+
+        toplam = toplam+A(i,j); % Her elemani toplama ekler.
 
     end
-end
-```
 
-Dış döngü satırları, iç döngü sütunları dolaşır.
-
-**Görüntü işlemeyle ilişkisi:** Her pikseli tek tek incelemek ve değiştirmek için aynı yapı kullanılabilir.
-
-## 18. Veri Türleri
-
-```matlab
-a = 100;
-b = uint8(100);
-c = true;
-
-disp(class(a))   % double
-disp(class(b))   % uint8
-disp(class(c))   % logical
-```
-
-| Tür | Özellik |
-|---|---|
-| `double` | Ondalıklı hesaplamalarda kullanılır. |
-| `uint8` | 0–255 aralığında tam sayıları saklar. |
-| `uint16` | 0–65535 aralığında tam sayıları saklar. |
-| `logical` | `true` ve `false` değerlerini saklar. |
-
-Tür dönüşümü:
-
-```matlab
-A = uint8([0 100 255]);
-
-B = double(A);
-```
-
-`double(A)` değerleri değiştirmeden veri türünü dönüştürür.
-
-## 19. Temel İstatistiksel İşlemler
-
-```matlab
-degerler = [50 100 150 200];
-
-toplam = sum(degerler);
-ortalama = mean(degerler);
-enKucuk = min(degerler);
-enBuyuk = max(degerler);
-```
-
-Bir matrisin bütün elemanları üzerinde işlem yapmak için `A(:)` kullanılabilir:
-
-```matlab
-A = [10 20 30;
-     40 50 60];
-
-ortalama = mean(A(:));
-
-disp(ortalama)   % 35
-```
-
-Koşulu sağlayan elemanları sayma:
-
-```matlab
-adet = nnz(A >= 40);
-
-disp(adet)   % 3
-```
-
-## 20. İlk Bütünleşik Uygulama
-
-Aşağıdaki örnekte küçük bir matrisin değerleri artırılır ve belirli bir sınırda tutulur.
-
-```matlab
-% Örnek piksel değerleri
-I = [50  100 150;
-     200 230 250];
-
-% Sonuç matrisi
-sonuc = zeros(size(I));
-
-% Her elemana 30 ekle.
-for satir = 1:size(I, 1)
-    for sutun = 1:size(I, 2)
-
-        yeniDeger = I(satir, sutun) + 30;
-
-        if yeniDeger > 255
-            yeniDeger = 255;
-        end
-
-        sonuc(satir, sutun) = yeniDeger;
-
-    end
 end
 
-disp('Başlangıç matrisi:')
-disp(I)
+disp(toplam)                % Matris elemanlari toplamini gosterir. Sonuc: 450
 
-disp('Sonuç matrisi:')
-disp(sonuc)
+% Alternatif:
+toplam2 = sum(A,"all");     % Matrisin tum elemanlarini dogrudan toplar.
+
+%% 23. KOMUTLARIN KISA TANIMLARI
+
+% clc       : Command Window ekranini temizler.
+% clear     : Workspace degiskenlerini temizler.
+% close all : Acik grafik pencerelerini kapatir.
+% disp      : Deger veya metni ekrana yazdirir.
+% fprintf   : Bicimlendirilmis cikti olusturur.
+% who       : Degisken isimlerini listeler.
+% whos      : Degiskenlerin ayrintili bilgilerini gosterir.
+% sqrt      : Karekok hesaplar.
+% size      : Dizinin boyutlarini verir.
+% numel     : Dizinin toplam eleman sayisini verir.
+% length    : Dizinin en buyuk boyut uzunlugunu verir.
+% zeros     : Sifirlardan olusan dizi olusturur.
+% ones      : Birlerden olusan dizi olusturur.
+% eye       : Birim matris olusturur.
+% rand      : Rastgele sayilardan olusan dizi olusturur.
+% sum       : Sayisal elemanlarin toplamini hesaplar.
+% if        : Kosullu islem baslatir.
+% elseif    : Alternatif bir kosulu kontrol eder.
+% else      : Kosul saglanmadiginda calisir.
+% for       : Tekrarli islemler icin dongu olusturur.
+% end       : Kontrol blogunu sonlandirir.
+% end       : Indislemede son elemani temsil eder.
+
+%% 24. OPERATORLERIN KISA TANIMLARI
+
+% =         : Degiskene deger atar.
+% +         : Toplama islemi yapar.
+% -         : Cikarma islemi yapar.
+% *         : Matris carpimi veya skaler carpma yapar.
+% /         : Sagdan matris bolme veya skaler bolme yapar.
+% ^         : Matris kuvveti veya skaler us alma yapar.
+% .*        : Eleman bazinda carpma yapar.
+% ./        : Eleman bazinda bolme yapar.
+% .^        : Eleman bazinda us alma yapar.
+% >         : Buyuktur karsilastirmasi yapar.
+% <         : Kucuktur karsilastirmasi yapar.
+% >=        : Buyuk veya esittir.
+% <=        : Kucuk veya esittir.
+% ==        : Esittir karsilastirmasi yapar.
+% ~=        : Esit degildir karsilastirmasi yapar.
+% &&        : Kisa devreli mantiksal VE operatoru.
+% ||        : Kisa devreli mantiksal VEYA operatoru.
+% &         : Eleman bazinda mantiksal VE operatoru.
+% |         : Eleman bazinda mantiksal VEYA operatoru.
+% ~         : Mantiksal DEGIL operatoru.
+% :         : Dizi olusturur veya indis araligi secer.
+% ;         : Ciktiyi bastirir veya matris satirlarini ayirir.
+% %         : Yorum satiri olusturur.
+% %%        : Kod bolumu olusturur.
+% []        : Matris veya vektor olusturur.
+% ()        : Fonksiyon cagirir, indisleme veya gruplama yapar.
+
 ```
-
-**Sonuç:**
-
-```text
-    80   130   180
-   230   255   255
-```
-
-Bu uygulamada değişkenler, matrisler, indisleme, döngüler ve koşullar birlikte kullanılmıştır.
-
-## 21. Çalışma Alanını Yönetme
-
-| Komut | Görevi |
-|---|---|
-| `clc` | Komut Penceresi’ndeki yazıları temizler. |
-| `clearvars` | Çalışma alanındaki değişkenleri siler. |
-| `close all` | Açık grafik pencerelerini kapatır. |
-| `whos` | Değişkenlerin özelliklerini gösterir. |
-| `pwd` | Çalışma klasörünü gösterir. |
-| `dir` | Klasördeki dosyaları listeler. |
-| `help size` | `size` için kısa yardım gösterir. |
-| `doc size` | `size` dokümantasyonunu açar. |
-
-**Önemli:** `clc` değişkenleri silmez. `clearvars` ise değişkenleri siler.
-
-## 22. Başlangıç Alıştırmaları
-
-1. 800 × 600 boyutundaki bir görüntünün toplam piksel sayısını hesaplayın.
-2. 3 × 3 boyutunda bir matris oluşturup merkezindeki değeri değiştirin.
-3. `for` döngüsüyle 1’den 10’a kadar sayıların toplamını bulun.
-4. Bir matriste 128 ve üzerindeki değerleri sayın.
-5. Bir matrise 50 ekleyip 255’i aşan değerleri 255’e sınırlandırın.
-6. Aynı işlemi hem döngüyle hem de toplu matris işlemiyle gerçekleştirin.
