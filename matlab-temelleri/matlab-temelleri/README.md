@@ -3,8 +3,6 @@
 **Dr. Öğr. Üyesi İsmail KAYADİBİ**  
 Afyon Kocatepe Üniversitesi — Yönetim Bilişim Sistemleri Bölümü
 
-Lisans düzeyinde MATLAB öğrenen öğrenciler için adım adım öğretici içerik. Değişken, vektör ve matris işlemlerinden koşullara ve iç içe döngülere ilerler. Bu bölüm, sonraki görüntü işleme uygulamalarının programlama temelini oluşturur.
-
 ## Öğrenme hedefleri
 
 - Çalışma ortamını düzenlemek; değişken, vektör ve matris oluşturmak.
