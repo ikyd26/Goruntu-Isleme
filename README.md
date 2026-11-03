@@ -37,8 +37,3 @@ MATLAB açıldığında karşınıza çıkan ana pencereler:
 
 
 
-
-```
-
----
-
