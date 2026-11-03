@@ -49,10 +49,8 @@ Temel örnekler MATLAB ile çalışır; Image Processing Toolbox gerektirmez. He
 
 [Değerlendirme soruları](uygulamalar/README.md) ve [açıklamalı çözüm](cozumler/degerlendirme_cozum.m).
 
-## GitHub’a yükleme
 
-GitHub’da `matlab-temelleri` adında boş bir repository oluşturunuz. **Add file → Upload files** üzerinden bu klasörün içeriğini yükleyip commit ediniz. Dersler ve README bağlantıları klasör yapısı korunduğunda çalışır.
 
 ## Kapsam
 
-Bu repo MATLAB temellerini kapsar. Görüntü okuma, görüntüleme, renk kanalları ve piksel dönüşümleri sonraki ders aşamasıdır. Slaytlardaki kapak ve hedefler bu ana sayfada; değerlendirme ayrı uygulama klasöründe sunulmuştur.
+Bu repo MATLAB temellerini kapsar.
