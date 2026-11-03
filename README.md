@@ -1,5 +1,5 @@
 
-# Bölüm 1: MATLAB Temelleri ve Çalışma Ortamı
+MATLAB Temelleri ve Çalışma Ortamı
 
 Bu doküman, **Görüntü İşleme** dersine hazırlık amacıyla MATLAB ortamını tanımak, temel matris mantığını kavramak ve veri yapıları üzerinde işlem yapmak için hazırlanmıştır.
 
