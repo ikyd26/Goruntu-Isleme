@@ -21,7 +21,7 @@ Afyon Kocatepe Üniversitesi — Yönetim Bilişim Sistemleri Bölümü
 
 Temel örnekler MATLAB ile çalışır; Image Processing Toolbox gerektirmez. Her örnek dosyası ihtiyaç duyduğu değişkenleri tanımlar. `sum(A(:))` tüm elemanları toplar; yeni sürümlerde `sum(A,"all")` da kullanılabilir.
 
-## Ders sırası
+## Konu Akışı için aşağıdaki adımları takip ediniz.
 
 | Adım | Konu |
 |---|---|
