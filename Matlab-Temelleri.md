@@ -3,7 +3,7 @@
 **Dr. Öğr. Üyesi İsmail KAYADİBİ**  
 Afyon Kocatepe Üniversitesi — Yönetim Bilişim Sistemleri Bölümü
 
-Bu öğretici, MATLAB temellerini değişkenlerden iç içe döngülere kadar adım adım açıklar. Örnekleri sırayla uygulayarak görüntü işlemede kullanılacak matris işlemlerinin temelleri öğrenilir.
+Bu içerik, MATLAB temellerini değişkenlerden iç içe döngülere kadar adım adım açıklar. Örnekleri sırayla uygulayarak görüntü işlemede kullanılacak matris işlemlerinin temelleri öğrenilmesi amaçlanmaktadır.
 
 ## Nasıl çalışılır?
 
